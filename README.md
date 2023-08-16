@@ -21,7 +21,7 @@
 
 <br>
 
-# Step 2 : Change The ```DISPLAY``` Envionment Variable
+# Step 2 : Change The `DISPLAY` Envionment Variable
 
 ## 1) Open Powershell
 
@@ -40,7 +40,7 @@
     ```
 -   Restart Powershell
     -   You MUST close and re-open PowerShell for the changes to take effect
-    -   To double check if the ```DISPLAY``` variable was saved, copy/paste the following
+    -   To double check if the `DISPLAY` variable was saved, copy/paste the following
     ```bash
     $env:DISPLAY
     ```
@@ -94,44 +94,52 @@ ssh-keygen -t rsa
 
 ```bash
  C:\Users\S123456789\.ssh
-``` 
-- Use the `ls` command to list the contents of the `.ssh` directory 
-- We're going to need the `public key` that has the `.pub` ending as shown in the screenshot below 
-- You can use either ```VI``` or ```VIM``` to view the contents of your `public key`
+```
+
+-   Use the `ls` command to list the contents of the `.ssh` directory
+-   We're going to need the `public key` that has the `.pub` ending as shown in the screenshot below
+-   You can use either `VI` or `VIM` to view the contents of your `public key`
     ![image](https://github.com/Digital1O1/4_DOF_Robotic_Arm/assets/39348633/d00623bc-6fb1-465d-aa29-97f43a78b550)
 
 ## 3) Save SSH Key on Raspberry PI
-- Type in the following commands in your Raspberry PI terminal
+
+-   Type in the following commands in your Raspberry PI terminal
+
 ```bash
 cd ~
 sudo nano ~/.ssh/authorized_keys
 ```
-- If the ```.ssh``` folder DOESN'T exist, use the following commands
+
+-   If the `.ssh` folder DOESN'T exist, use the following commands
+
 ```bash
 cd ~
 mkdir authorized_keys
 sudo nano ~/.ssh/authorized_keys
 ```
-- Then :
-    - Paste your ```.pub``` SSH key into the ```authorized_keys``` file
-    - Press ```Control + X``` --> ```Y``` --> ```ENTER``` to save and exit out of the file
+
+-   Then :
+    -   Paste your `.pub` SSH key into the `authorized_keys` file
+    -   Press `Control + X` --> `Y` --> `ENTER` to save and exit out of the file
 
 ## 4) Obtain your Raspberry PI IP address
-- Open a terminal on the Raspberry PI
-- Type in the following and take note of the value that's displayed under the ```wlan0``` section
+
+-   Open a terminal on the Raspberry PI
+-   Type in the following and take note of the value that's displayed under the `wlan0` section
     ```bash
     ifconfig
     ```
     ![image](https://github.com/Digital1O1/Remotely-Debug-C-Programs-on-RPI-Using-VS-Code/assets/39348633/5094e115-1d6a-4775-b6e3-224ddad1cc65)
 
-## 5) Enable X11 Port Fowarding 
-- On your host machine 
-    - Open a Powershell instance 
-    - Use the :
-        - ```cd``` command to return back to the ```.ssh``` folder
-        - ```-ls -a``` command to list everything stored in the ```.ssh``` folder
-            - You should see a ```config``` file
-            - Use either ```vim``` or ```nano``` to edit the ```config``` file and enter the following WITHOUT THE BRACKETS
+## 5) Enable X11 Port Fowarding
+
+-   On your host machine
+    -   Open a Powershell instance
+    -   Use the :
+        -   `cd` command to return back to the `.ssh` folder
+        -   `-ls -a` command to list everything stored in the `.ssh` folder
+            -   You should see a `config` file
+            -   Use either `vim` or `nano` to edit the `config` file and enter the following WITHOUT THE BRACKETS
             ```bash
                 Host [YOUR RASPBERRY PI IP ADDRESS]
                     HostName [YOUR RASPBERRY PI IP ADDRESS]
@@ -140,33 +148,29 @@ sudo nano ~/.ssh/authorized_keys
                     ForwardX11 yes
                     ForwardX11Trusted yes
             ```
-    
-
 
 <br>
 
 # Step 4 : Configuring VS Code for remote development
-- Open VS Code 
-    - Right click on ```Remote-SSH```
-    - Click on ```Extension Settings```
-    - Ensure the following boxes are checked:
-        - Remote.SSH: Enable Agent Forwarding
-        - Remote.SSH: Enable Dynamic Forwarding
-        - Remote.SSH: Enable X11 Forwarding
-![image](https://github.com/Digital1O1/Remotely-Debug-C-Programs-on-RPI-Using-VS-Code/assets/39348633/28e62abd-0267-4eba-b8f2-7ac6be5c3d1e)
+
+-   Open VS Code - Right click on `Remote-SSH` - Click on `Extension Settings` - Ensure the following boxes are checked: - Remote.SSH: Enable Agent Forwarding - Remote.SSH: Enable Dynamic Forwarding - Remote.SSH: Enable X11 Forwarding
+    ![image](https://github.com/Digital1O1/Remotely-Debug-C-Programs-on-RPI-Using-VS-Code/assets/39348633/28e62abd-0267-4eba-b8f2-7ac6be5c3d1e)
 
 <br>
 
-- Establish connection to host
-    - Press ```Control + Shift + P```
-    - Type in the following : ```connect to host``` and choose either option
-    - Click on ```Add New SSH Host```
-    - To verify that you're connected to the Raspberry PI you can :
-        - Check the lower left corner and you should see the Raspberry PI IP address
-        - A bash terminal should open up 
-    
-![image](https://github.com/Digital1O1/Remotely-Debug-C-Programs-on-RPI-Using-VS-Code/assets/39348633/ab9e3ef0-2a4c-4739-a223-259bc104bca7)
+-   Establish connection to host
+    -   Press `Control + Shift + P`
+    -   Type in the following : `connect to host` and choose either option
+    -   Click on `Add New SSH Host`
+    -   To verify that you're connected to the Raspberry PI you can :
+        -   Check the lower left corner and you should see the Raspberry PI IP address
+            ![image](https://github.com/Digital1O1/Remotely-Debug-C-Programs-on-RPI-Using-VS-Code/assets/39348633/ab9e3ef0-2a4c-4739-a223-259bc104bca7)
+            ![image](https://github.com/Digital1O1/Remotely-Debug-C-Programs-on-RPI-Using-VS-Code/assets/39348633/609af753-9a70-40cb-adf2-df4efb71ff68)
+        -   Both a bash terminal and the IP address should show up as indicated in the screenshot below
+            ![image](https://github.com/Digital1O1/Remotely-Debug-C-Programs-on-RPI-Using-VS-Code/assets/39348633/dbc7e89a-8005-4e03-9830-d74ac7eda989)
 
-![image](https://github.com/Digital1O1/Remotely-Debug-C-Programs-on-RPI-Using-VS-Code/assets/39348633/609af753-9a70-40cb-adf2-df4efb71ff68)
-
-![image](https://github.com/Digital1O1/Remotely-Debug-C-Programs-on-RPI-Using-VS-Code/assets/39348633/dbc7e89a-8005-4e03-9830-d74ac7eda989)
+-   To open a project that's saved on the Raspberry PI
+    -   Click the first icon on the left side menu
+    -   Click on `Open Folder`
+        -   Then you can navagate to whatever folder your project is stored in
+            ![image](https://github.com/Digital1O1/Remotely-Debug-C-Programs-on-RPI-Using-VS-Code/assets/39348633/39dee248-9492-41bc-aa46-68ed690abb24)
